@@ -33,3 +33,10 @@ for i in range(len(rnd_list)//2):
     numberMultiply = numberFirst * numberSecond
     count += 1
     print(f'\t\tпара чисел {count}:\t[{numberFirst} * {numberSecond} составляет {numberMultiply}]')
+    if len(rnd_list) % 2 != 0:
+        position = round(len(rnd_list)/2 - 1)
+        # print(f'Индекс средней позиции: {position}')
+        valueSquare = rnd_list[position] ** 2
+
+if len(rnd_list) % 2 != 0:
+    print(f'\t\tиндекс без пары {position}, \t[{rnd_list[position]}² = {valueSquare}]')
