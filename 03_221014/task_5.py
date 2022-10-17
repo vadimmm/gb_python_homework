@@ -19,28 +19,26 @@ def inputNumber():
 k = inputNumber()
 fibonacci_list = []
 
-def negafibonacci(k):
-        f1, f2 = 1, -1
-        fibonacci_list.insert(0, f1)
-        fibonacci_list.insert(0, f2)
-        for j in range(2, k):
-            f1, f2 = f2, f1 - f2
-            fibonacci_list.insert(0, f2)
-def fibonacci(k):
-    if k == 0:
-        fibonacci_list.append(0)
+def negafibonacci(fList, n):
+        n1, n2 = 1, -1
+        fList.insert(0, n1)
+        fList.insert(0, n2)
+        for i in range(2, n):
+            n1, n2 = n2, n1 - n2
+            fList.insert(0, n2)
+def fibonacci(fList, n):
+    if n == 0:
+        fList.append(0)
     else:
-        f1, f2 = 0, 1
-        fibonacci_list.append(f1)
-        fibonacci_list.append(f2)
-        for i in range(2, k + 1):
-            f1, f2 = f2, f1 + f2
-            fibonacci_list.append(f2)
+        n1, n2 = 0, 1
+        fList.append(n1)
+        fList.append(n2)
+        for i in range(2, n + 1):
+            n1, n2 = n2, n1 + n2
+            fList.append(n2)
 
-
-negafibonacci(k)
-fibonacci(k)
-
+negafibonacci(fList=fibonacci_list, n=k)
+fibonacci(fList=fibonacci_list, n=k)
 
 result = fibonacci_list
 print(f'\nОТВЕТ: Последовательность Фибоначчи \n{result}')
