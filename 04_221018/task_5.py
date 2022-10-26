@@ -7,8 +7,6 @@
 #
 # Результат:
 # 40x⁹ - x⁸ -5x⁷ + 15x⁶ +5x⁴ + 5x³ + x² - 13x¹ + 53 = 0 40x9
-import collections
-import functools
 
 degrees = {"0": "\u2070",
            "1": "\u00B9",
@@ -34,39 +32,30 @@ degrees_numb = {"0": "⁰",
                "9": "⁹"
                }
 
-# 1 - прочитать файлы и занести строки в списки
 def convertEquationFileToList(lNmae, fileName):
     # строка из файла в лист
     f = open(fileName, 'r', encoding='UTF-8')
     lNmae = f.readline()
-    # print(lNmae)
     f.close()
     return lNmae
 
 stage_1_1 = convertEquationFileToList('equation_lst_1', fileName='t5_1')
 stage_1_2 = convertEquationFileToList('equation_lst_2', fileName='t5_2')
 
-# 2 - убрать пробелы
-# 3 - найти отрицательные элементы через - заменить на +-
-# 4 - разбить по + строку и занести данные в элементы списка
 def parseEquationElementToList(lName):
     # разобрать числа на множители в каждый индекс
     tmp = lName.replace(" ", "")[:-2]
     result = tmp.replace("-", "+-").split("+")
-    print(result)
     return result
 
 stage_2_1 = parseEquationElementToList(stage_1_1)
 stage_2_2 = parseEquationElementToList(stage_1_2)
 
-# 5 - взять первый наибольший элемент списка из файлов, разбить на части (число, x, степень) найти значение степени
 def getExpressionDegree(lNameInput, pos):
     # в списке найти и подставить значение СТЕПЕНИ в выражении "00x⁰" по индексу
     lst = list(lNameInput[pos].partition('x'))
-    # print(lst)
     degree = lst[2]
     if degree == '':
-        print(f'У выражения не найдена степень, будет 0 ')
         degree_numb = 0
     else:
         deg = list(degree)
@@ -85,7 +74,6 @@ def getExpressionNumber(lNameInput, pos):
     # print(lst)
     numb = lst[0]
     if numb == '':
-        print('Нет значения числа "x" будет ЕДИНИЦА')
         numb = 1
     else:
         numb = lst[0]
@@ -99,9 +87,7 @@ def genDict(lName):
         key = getExpressionDegree(lName, i)
         value = getExpressionNumber(lName, i)
         dName[str(key)] = int(value)
-    # print(dName)
     return dName
-
 
 stage_3_1 = genDict(stage_2_1)
 stage_3_2 = genDict(stage_2_2)
@@ -115,8 +101,6 @@ for key, value in stage_3_1.items():
     else:
         stage_3_2[key] = value + stage_3_2[key]
 
-# print(f'\n {stage_3_2}')
-
 def degreeReplace(equation):
     # Преобразует "00x^0" в "00x⁰"
     value = list(equation.partition('^'))
@@ -129,6 +113,9 @@ def degreeReplace(equation):
     res = ''.join(value)
     return res
 
+
+def sumEquationFromFile():
+    pass
 result_lst = []
 count = 0
 for key, value in sorted(stage_3_2.items(), reverse=True):
