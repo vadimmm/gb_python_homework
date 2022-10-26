@@ -17,8 +17,8 @@ def inputNumber():
         print("Вы не ввели число, попробуйте снова!")
         return inputNumber()
 
-# k = inputNumber()
-k = 25
+k = inputNumber()
+# k = 3
 
 x = "x"
 degree_symbol = '^'
@@ -42,7 +42,7 @@ def degreeReplace(equation):
     value.pop(1)
     degree = list(value[1])
     for i in range(len(degree)):
-        digit = degree[int(i)]
+        digit = degree[i]
         degree[i] = degrees[digit]
     value[1] = ''.join(degree)
     res = ''.join(value)
@@ -50,7 +50,7 @@ def degreeReplace(equation):
 
 result_lst = []
 count = 0
-for i in range(k, 0, -1):
+for i in range(k, -1, -1):
     rnd = random.randint(-100, 100 + 1)
     rnd_sign = random.choice(sign)
 
@@ -59,6 +59,10 @@ for i in range(k, 0, -1):
     elif i == k and count == 0 and rnd != 0:
         equation = str(rnd) + x + degree_symbol + str(i)
         count += 1
+    elif rnd < 0 and i == 0:
+        equation = str(rnd)
+    elif i == 0:
+        equation = str(rnd_sign) + str(rnd)
     elif rnd < 0 and i == 1:
         equation = str(rnd) + x
     elif i == 1:
@@ -73,6 +77,10 @@ for i in range(k, 0, -1):
     # result_lst.append(equation)
     result_lst.append(degreeReplace(equation))
 
-print()
 
-print(''.join(result_lst) + '=0')
+result = ''.join(result_lst) + '=0'
+print(result)
+
+
+
+
