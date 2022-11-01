@@ -9,9 +9,9 @@ import os
 import random
 import time
 
-candy_start = 20
+candy_start = 2021
 candy_min = 1
-candy_max = 4
+candy_max = 28
 candy_count = 0
 bot_sleep = 2
 
@@ -161,32 +161,18 @@ def stepBotAi(PlayerNumb):
     return numb
 
 
-# def blackBoxAi(last_player, PlayerNumb, maxNumb):
-#     if last_player == 2 and candy_count == 0:
-#         numb = int(candy_start % (maxNumb + 1))
-#     elif candyLeftValue >= candy_start - candy_count:
-#         if PlayerNumb == maxNumb:
-#             numb = maxNumb
-#         else:
-#             numb = candy_max - PlayerNumb
-#     elif candyLeftValue <= candy_max:
-#         numb = candyLeftValue
-#     return numb
-
-
 def blackBoxAi(last_player, PlayerNumb, maxNumb):
     candyLeftValue = candyLeft(candy_count)
     if last_player == 2 and candy_count == 0:
-        numb = int(candy_start % (maxNumb) + 1)
-    elif (candyLeftValue >= candy_start - candy_count):
-        if PlayerNumb == 0:
-            numb = maxNumb
-        elif PlayerNumb == maxNumb:
-            numb = maxNumb
-        else:
-            numb = candy_max - PlayerNumb
+        numb = candy_count % maxNumb + 1
     elif candyLeftValue <= candy_max:
         numb = candyLeftValue
+    elif candyLeftValue + 1 >= candy_start - candy_count:
+        if PlayerNumb == 0 or PlayerNumb == maxNumb:
+            numb = maxNumb
+        else:
+            numb = maxNumb - PlayerNumb
+
     return numb
 
 
@@ -242,3 +228,4 @@ while True:
     candy_count += numb
 
 input('\n\n\nНажмите "Enter ⏎" для выхода!')
+            
