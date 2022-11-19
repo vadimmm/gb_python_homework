@@ -14,12 +14,12 @@ def inputNumber(msg):
         print("Вы не ввели число, попробуйте снова!")
         return inputNumber()
 
-# N = inputNumber()
 
-def old_realization(N):
+numb = inputNumber(msg="Пожалуйста, введите длину списка: ")
+rnd_interval = inputNumber(msg="Введите размер симметричного пула случайных чисел: ")
 
-    numb = inputNumber(msg="Пожалуйста, введите длину списка: ")
-    rnd_interval = inputNumber(msg="Введите размер симметричного пула случайных чисел: ")
+
+def old_realization(numb, rnd_interval):
     rnd_list = {}
 
     for i in range(0, numb, 1):
@@ -34,30 +34,19 @@ def old_realization(N):
 
     print(f'\nОТВЕТ: Сумма нечётных позиций индексов составляет {sum}')
 
-def new_realization(N):
-    N_list = [randint(-10, 10) for i in range(10)]
-    # for i in range(N):
-    #     N_list[i] = random.randint(-N, N)
 
-    print(f"Сгенерированные значения: {N_list}")
+def new_realization(numb, rnd_interval):
+    rnd_list = [randint(round(-rnd_interval / 2), round(rnd_interval / 2) + 1) for i in range(0, numb, 1)]
+
+    print(f'Сгенерированный список: {rnd_list}')
+
+    result = sum(rnd_list[i] for i in filter(lambda x: x, range(1, len(rnd_list), 2)))
+
+    print(f'\nОТВЕТ: Сумма нечётных позиций индексов составляет {result}')
 
 
-    input_position = input("Введите актуальные позиции для расчёта: ").split()
-    input_list = [int(numb) for numb in set(input_position) if -N <= int(numb) < N]
+print('old_realization()')
+old_realization(numb, rnd_interval)
 
-    print(f"Введённые позиции для произведения: {input_list}")
-
-    product_of_numbers = 1
-
-    for i in range(len(input_list)):
-        for j in range(len(N_list)):
-            if j == i:
-                product_of_numbers *= N_list[input_list[i]]
-
-    print(f'\nОТВЕТ: Произведение выбранных индексов составляет {product_of_numbers}')
-
-# print('old_realization(n)')
-# old_realization(N)
-
-print('\nnew_realization(n)')
-new_realization(N)
+print('\nnew_realization()')
+new_realization(numb, rnd_interval)
